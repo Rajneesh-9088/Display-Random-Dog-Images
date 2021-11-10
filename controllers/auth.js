@@ -4,7 +4,6 @@ exports.register = async (req,res,next) =>{
 
     const {username, email, password} = req.body;
 
-    console.log(username , email, password)  
 
     try{
         const user = await User.create({
@@ -12,8 +11,6 @@ exports.register = async (req,res,next) =>{
             email,
             password,
         });
-
-      
         sendToken(user,201,res)
     } catch(error) {
         next(error)
