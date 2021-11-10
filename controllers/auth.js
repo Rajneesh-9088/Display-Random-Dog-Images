@@ -1,4 +1,22 @@
-exports.register = (req,res,next) =>{
+const User = require("../models/User");
+
+exports.register = async (req,res,next) =>{
+
+    const {username, email, password} = req.body;
+
+    try{
+        const user = await User.create({
+            username,
+            email,
+            password,
+        })
+    } catch(error) {
+         res.status(500).json({
+              success: false,
+              error: error.message
+         })
+    }
+
     res.send("Register Route");
 }
 
