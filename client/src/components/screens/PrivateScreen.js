@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import "./PrivateScreen.css";
+import HomeScreen from "./HomeScreen";
 
-const PrivateScreen = ({history}) => {
+const PrivateScreen = ({ history }) => {
   const [error, setError] = useState("");
   const [privateData, setPrivateData] = useState("");
   const [username, setUsername] = useState("");
@@ -29,20 +30,28 @@ const PrivateScreen = ({history}) => {
     fetchPrivateDate();
   }, [history]);
 
-const  logoutHandler = () =>{
-       localStorage.removeItem("authToken");
-       history.push("/");
-}
+  const logoutHandler = () => {
+    localStorage.removeItem("authToken");
+    history.push("/");
+  };
 
   return error ? (
     <span className="error-message">{error}</span>
   ) : (
-    <div style={{background: "green", color: "white"}} >
+    <>
+      <div style={{ background: "green", color: "white" }}>
         <h1>{username}</h1>
         {privateData}
-        <button onClick={logoutHandler}style={{margin: "10px", color: "red"}} > Logout </button>
-    </div>
-    
+        <button
+          onClick={logoutHandler}
+          style={{ margin: "10px", color: "red" }}
+        >
+          {" "}
+          Logout{" "}
+        </button>
+      </div>
+      <HomeScreen />
+    </>
   );
 };
 
